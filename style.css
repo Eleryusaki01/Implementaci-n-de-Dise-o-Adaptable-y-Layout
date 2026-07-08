@@ -1,0 +1,699 @@
+/* ==========================================================================
+   DESIGN SYSTEM — MESA DE AYUDA (HELP DESK)
+   Sistema de Gestión de Incidentes
+   Actividad #5 · Unidad 3 · Desarrollo de Sistemas Informáticos — UTM Online
+   --------------------------------------------------------------------------
+   UI Kit reutilizable construido con CSS3 puro:
+   variables (:root), modelo de cajas y selectores avanzados.
+   Paleta corporativa extraída del escudo de la Universidad Técnica de Manabí.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CONFIGURACIÓN DEL DESIGN SYSTEM (Variables :root)
+   -------------------------------------------------------------------------- */
+:root {
+
+  /* ---- Paleta corporativa (colores del escudo UTM) ---- */
+  --color-primary:        #139849;   /* Verde institucional UTM        */
+  --color-primary-dark:   #0E7439;   /* Estados :hover / :active       */
+  --color-primary-light:  #E7F5EC;   /* Fondos suaves y realces        */
+
+  --color-secondary:      #F9D23D;   /* Dorado UTM (banda "PATRIA")     */
+  --color-secondary-dark: #D9B216;   /* Estado :hover del secundario   */
+
+  /* ---- Colores semánticos ---- */
+  --color-success: #2E9E4F;          /* Éxito  · Prioridad Baja        */
+  --color-warning: #E58E34;          /* Aviso  · Prioridad Media       */
+  --color-error:   #D12C26;          /* Error  · Prioridad Alta (rojo UTM) */
+  --color-info:    #2E7FA5;          /* Informativo (azul del escudo)  */
+
+  /* ---- Neutros (interfaz) ---- */
+  --color-ink:     #1B2A21;          /* Texto principal                */
+  --color-muted:   #5C6B62;          /* Texto secundario               */
+  --color-border:  #D8DED9;          /* Bordes                         */
+  --color-surface: #FFFFFF;          /* Superficies (tarjetas, campos) */
+  --color-bg:      #F4F7F5;          /* Fondo general de la aplicación */
+
+  /* ---- Tipografía base ---- */
+  --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --fs-base:   1rem;      /* 16px */
+  --fs-sm:     0.875rem;  /* 14px */
+  --fs-lg:     1.125rem;  /* 18px */
+  --lh-base:   1.6;
+
+  /* ---- Escala de espaciado ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  /* ---- Radios y sombras ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(27, 42, 33, 0.08);
+  --shadow-md: 0 4px 14px rgba(27, 42, 33, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(19, 152, 73, 0.30); /* anillo de foco */
+
+  /* ---- Transición base ---- */
+  --transition: 160ms ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET / BASE
+   Regla general box-sizing: border-box (patrón del compendio, Unidad 3)
+   -------------------------------------------------------------------------- */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accesibilidad: respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. LAYOUT DE LA PÁGINA DE DEMOSTRACIÓN
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* Encabezado principal con degradado (gradiente lineal, Unidad 3) */
+.site-header {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  padding: var(--space-6) 0;
+  border-bottom: 4px solid var(--color-secondary);
+}
+.site-header h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.site-header p {
+  margin-top: var(--space-2);
+  font-size: var(--fs-lg);
+  opacity: 0.92;
+}
+.site-header .eyebrow {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-2);
+}
+
+/* Cada bloque de componentes */
+.section {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.section__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-2);
+}
+.section__desc {
+  color: var(--color-muted);
+  margin-bottom: var(--space-5);
+  max-width: 62ch;
+}
+
+/* Rejilla flexible para mostrar los componentes (Flexbox) */
+.showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   4. COMPONENTE · BOTONES
+   Clases: .btn (base) + variantes de color + estados :hover / :focus
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1;
+  padding: var(--space-3) var(--space-5);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition),
+              border-color var(--transition),
+              transform var(--transition);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+/* Foco visible por teclado (accesibilidad) */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Botón primario */
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Botón secundario */
+.btn--secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-ink);
+}
+.btn--secondary:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Botón de peligro */
+.btn--danger {
+  background-color: var(--color-error);
+  color: #fff;
+}
+.btn--danger:hover {
+  background-color: #A81E19;
+}
+
+/* Botón contorneado (variante reutilizable) */
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+.btn--outline:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* Estado deshabilitado */
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   5. COMPONENTE · FORMULARIOS
+   Campos de texto (input) y listas desplegables (select)
+   con borde, padding y sombreado al hacer foco (:focus)
+   -------------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: var(--space-5);
+  max-width: 380px;
+}
+.form-label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+}
+
+/* Clase común reutilizada por input y select */
+.form-control {
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-control::placeholder {
+  color: var(--color-muted);
+}
+
+/* Sombreado al hacer clic / enfocar el campo */
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Estado de error del campo */
+.form-control.is-invalid {
+  border-color: var(--color-error);
+}
+.form-hint {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+
+/* --------------------------------------------------------------------------
+   6. COMPONENTE · TARJETAS (CARDS)
+   Contenedor con sombra (box-shadow) y bordes redondeados
+   para mostrar la información de un ticket
+   -------------------------------------------------------------------------- */
+.card {
+  width: 320px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-primary-light);
+}
+.card__id {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+.card__body {
+  padding: var(--space-5);
+}
+.card__title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+.card__text {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+.card__meta {
+  margin-top: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+.card__footer {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background-color: #FBFCFB;
+}
+
+/* --------------------------------------------------------------------------
+   7. COMPONENTE · ALERTAS / BADGES (Prioridad del ticket)
+   Etiquetas de color para indicar Alta, Media y Baja
+   -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+}
+/* Punto indicador reutilizable dentro del badge */
+.badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.badge--alta {
+  background-color: #FBE3E2;
+  color: var(--color-error);
+}
+.badge--media {
+  background-color: #FCEBDA;
+  color: var(--color-warning);
+}
+.badge--baja {
+  background-color: #E4F4E9;
+  color: var(--color-success);
+}
+
+/* --------------------------------------------------------------------------
+   8. COMPONENTE · ALERTAS DE MENSAJE (bloque)
+   Reutiliza los colores semánticos del sistema
+   -------------------------------------------------------------------------- */
+.alert {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid;
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-3);
+}
+.alert--success {
+  background-color: #E4F4E9;
+  border-color: var(--color-success);
+  color: #1E6A35;
+}
+.alert--warning {
+  background-color: #FCEBDA;
+  border-color: var(--color-warning);
+  color: #9A5A18;
+}
+.alert--error {
+  background-color: #FBE3E2;
+  border-color: var(--color-error);
+  color: #A81E19;
+}
+
+/* --------------------------------------------------------------------------
+   9. UTILIDAD · Muestras de color de la paleta
+   -------------------------------------------------------------------------- */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.swatch {
+  width: 140px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: var(--fs-sm);
+}
+.swatch__color {
+  height: 64px;
+}
+.swatch__label {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+}
+.swatch__label strong { display: block; }
+.swatch__label span { color: var(--color-muted); }
+
+/* --------------------------------------------------------------------------
+   10. DISEÑO ADAPTABLE (Media Queries)
+   Ajustes para tablet y móvil (< 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .site-header h1 { font-size: 1.5rem; }
+
+  .card { width: 100%; }
+
+  /* Los botones ocupan el ancho completo en móvil */
+  .showcase--stack .btn { width: 100%; }
+
+  .form-group { max-width: 100%; }
+}
+
+/* Pie de página */
+.site-footer {
+  padding: var(--space-6) 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+
+/* ==========================================================================
+   CAPA DE LAYOUT — ACTIVIDAD #6 (Diseño adaptable y layout responsive)
+   Integra el UI Kit anterior con navegación, dashboard, tabla y media queries.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   A. BARRA DE NAVEGACIÓN (Flexbox)
+   Menú horizontal en escritorio · vertical en móvil (< 768px)
+   -------------------------------------------------------------------------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 3px solid var(--color-secondary);
+}
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+.navbar__brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  background: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+}
+/* Botón hamburguesa (solo visible en móvil) mediante checkbox-hack (sin JS) */
+.navbar__checkbox { display: none; }
+.navbar__toggle {
+  display: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+}
+.navbar__link {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+.navbar__link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+.navbar__link.is-active {
+  background: #fff;
+  color: var(--color-primary-dark);
+}
+
+/* --------------------------------------------------------------------------
+   B. ESTRUCTURA DE PÁGINA
+   -------------------------------------------------------------------------- */
+.page { padding: var(--space-6) 0; }
+.page-header { margin-bottom: var(--space-5); }
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-ink);
+}
+.page-subtitle {
+  color: var(--color-muted);
+  margin-top: var(--space-1);
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   C. DASHBOARD — Rejilla de estadísticas (CSS Grid)
+   -------------------------------------------------------------------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+.stat-card--warning { border-left-color: var(--color-warning); }
+.stat-card--error   { border-left-color: var(--color-error); }
+.stat-card--success { border-left-color: var(--color-success); }
+.stat-card__value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  line-height: 1;
+}
+.stat-card__label {
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+
+/* Rejilla de tarjetas de ticket (CSS Grid fluido) */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+.cards-grid .card { width: auto; }
+
+/* --------------------------------------------------------------------------
+   D. TABLA DE TICKETS
+   100% de ancho · se convierte en tarjetas apiladas en móvil (sin scroll horizontal)
+   -------------------------------------------------------------------------- */
+.table-wrap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-sm);
+}
+.table th {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: #FBFCFB; }
+
+/* --------------------------------------------------------------------------
+   E. FORMULARIO DE REPORTE — rejilla de dos columnas
+   -------------------------------------------------------------------------- */
+.form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+  max-width: 760px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+.form-grid .form-group { margin-bottom: 0; max-width: 100%; }
+.form-grid .form-group--full { grid-column: 1 / -1; }
+.form-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+/* El área de texto reutiliza .form-control */
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* --------------------------------------------------------------------------
+   F. MEDIA QUERIES — Diseño adaptable
+   -------------------------------------------------------------------------- */
+
+/* Tablet (<= 992px): estadísticas en 2 columnas */
+@media (max-width: 992px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Móvil (< 768px) */
+@media (max-width: 768px) {
+
+  /* Menú de navegación vertical */
+  .navbar__toggle { display: block; }
+  .navbar__links {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+    padding-top: var(--space-3);
+  }
+  .navbar__checkbox:checked ~ .navbar__links { display: flex; }
+
+  /* Estadísticas y formulario en una sola columna */
+  .stats-grid { grid-template-columns: 1fr; }
+  .form-grid  { grid-template-columns: 1fr; }
+  .form-card  { padding: var(--space-5); }
+  .form-actions .btn { flex: 1; }
+
+  /* La tabla se transforma en tarjetas apiladas (ancho 100%, sin scroll) */
+  .table thead { display: none; }
+  .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
+  .table tr {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    margin: var(--space-3);
+    padding: var(--space-2) 0;
+  }
+  .table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    border-bottom: 1px dashed var(--color-border);
+  }
+  .table tr td:last-child { border-bottom: none; }
+  /* Etiqueta de cada celda tomada del atributo data-label */
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--color-muted);
+  }
+}

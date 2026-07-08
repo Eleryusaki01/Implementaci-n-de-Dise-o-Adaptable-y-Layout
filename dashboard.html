@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Diseño adaptable -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · Mesa de Ayuda — UTM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== NAVEGACIÓN (Flexbox) ===================== -->
+  <nav class="navbar">
+    <a class="navbar__brand" href="dashboard.html">
+      <span class="navbar__brand-mark">M</span> Mesa de Ayuda
+    </a>
+    <input type="checkbox" id="navToggle" class="navbar__checkbox">
+    <label for="navToggle" class="navbar__toggle" aria-label="Abrir menu">&#9776;</label>
+    <ul class="navbar__links">
+      <li><a class="navbar__link is-active" href="dashboard.html">Dashboard</a></li>
+      <li><a class="navbar__link" href="tickets.html">Tickets</a></li>
+      <li><a class="navbar__link" href="reportar.html">Reportar</a></li>
+    </ul>
+  </nav>
+
+  <main class="container page">
+
+    <header class="page-header">
+      <h1 class="page-title">Panel de control</h1>
+      <p class="page-subtitle">Resumen del estado de los incidentes.</p>
+    </header>
+
+    <!-- ===================== ESTADISTICAS (CSS Grid) ===================== -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__value">128</div>
+        <div class="stat-card__label">Tickets totales</div>
+      </div>
+      <div class="stat-card stat-card--error">
+        <div class="stat-card__value">14</div>
+        <div class="stat-card__label">Abiertos</div>
+      </div>
+      <div class="stat-card stat-card--warning">
+        <div class="stat-card__value">9</div>
+        <div class="stat-card__label">En proceso</div>
+      </div>
+      <div class="stat-card stat-card--success">
+        <div class="stat-card__value">105</div>
+        <div class="stat-card__label">Resueltos</div>
+      </div>
+    </section>
+
+    <!-- ===================== TICKETS RECIENTES (Grid de cards) ===================== -->
+    <div class="toolbar">
+      <h2 class="page-title" style="font-size:1.25rem;">Tickets recientes</h2>
+      <a class="btn btn--primary" href="reportar.html">+ Nuevo ticket</a>
+    </div>
+
+    <section class="cards-grid">
+
+      <article class="card">
+        <div class="card__header">
+          <span class="card__id">#TK-1042</span>
+          <span class="badge badge--alta">Alta</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Servidor de correo caido</h3>
+          <p class="card__text">Los usuarios no pueden enviar ni recibir correos.</p>
+          <p class="card__meta">Soporte N2 &middot; Hace 20 min</p>
+        </div>
+        <div class="card__footer">
+          <a class="btn btn--primary" href="tickets.html">Atender</a>
+          <a class="btn btn--outline" href="tickets.html">Ver</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__header">
+          <span class="card__id">#TK-1043</span>
+          <span class="badge badge--media">Media</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Impresora del laboratorio sin tinta</h3>
+          <p class="card__text">Solicitan reposicion de toner en el Lab. 2.</p>
+          <p class="card__meta">Soporte N1 &middot; Hace 2 h</p>
+        </div>
+        <div class="card__footer">
+          <a class="btn btn--primary" href="tickets.html">Atender</a>
+          <a class="btn btn--outline" href="tickets.html">Ver</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__header">
+          <span class="card__id">#TK-1044</span>
+          <span class="badge badge--baja">Baja</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Solicitud de nuevo mouse</h3>
+          <p class="card__text">Desgaste en el clic izquierdo del raton.</p>
+          <p class="card__meta">Inventario &middot; Ayer</p>
+        </div>
+        <div class="card__footer">
+          <a class="btn btn--primary" href="tickets.html">Atender</a>
+          <a class="btn btn--outline" href="tickets.html">Ver</a>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Mesa de Ayuda &middot; Actividad #6 &middot; Unidad 3 &mdash; Desarrollo de Sistemas Informaticos &middot; UTM
+    </div>
+  </footer>
+
+</body>
+</html>

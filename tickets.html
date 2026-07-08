@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets · Mesa de Ayuda — UTM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a class="navbar__brand" href="dashboard.html">
+      <span class="navbar__brand-mark">M</span> Mesa de Ayuda
+    </a>
+    <input type="checkbox" id="navToggle" class="navbar__checkbox">
+    <label for="navToggle" class="navbar__toggle" aria-label="Abrir menu">&#9776;</label>
+    <ul class="navbar__links">
+      <li><a class="navbar__link" href="dashboard.html">Dashboard</a></li>
+      <li><a class="navbar__link is-active" href="tickets.html">Tickets</a></li>
+      <li><a class="navbar__link" href="reportar.html">Reportar</a></li>
+    </ul>
+  </nav>
+
+  <main class="container page">
+
+    <header class="page-header">
+      <h1 class="page-title">Listado de tickets</h1>
+      <p class="page-subtitle">Todos los incidentes registrados en el sistema.</p>
+    </header>
+
+    <div class="toolbar">
+      <div class="form-group" style="margin:0; max-width:320px; width:100%;">
+        <input class="form-control" type="search" placeholder="Buscar ticket...">
+      </div>
+      <a class="btn btn--primary" href="reportar.html">+ Nuevo ticket</a>
+    </div>
+
+    <!-- ===================== TABLA DE TICKETS ===================== -->
+    <!-- En movil (< 768px) cada fila se apila como tarjeta usando data-label -->
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Asunto</th>
+            <th>Categoria</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="ID">#TK-1042</td>
+            <td data-label="Asunto">Servidor de correo caido</td>
+            <td data-label="Categoria">Redes</td>
+            <td data-label="Prioridad"><span class="badge badge--alta">Alta</span></td>
+            <td data-label="Estado">Abierto</td>
+            <td data-label="Accion"><a class="btn btn--outline" href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td data-label="ID">#TK-1043</td>
+            <td data-label="Asunto">Impresora sin tinta</td>
+            <td data-label="Categoria">Hardware</td>
+            <td data-label="Prioridad"><span class="badge badge--media">Media</span></td>
+            <td data-label="Estado">En proceso</td>
+            <td data-label="Accion"><a class="btn btn--outline" href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td data-label="ID">#TK-1044</td>
+            <td data-label="Asunto">Solicitud de nuevo mouse</td>
+            <td data-label="Categoria">Inventario</td>
+            <td data-label="Prioridad"><span class="badge badge--baja">Baja</span></td>
+            <td data-label="Estado">Resuelto</td>
+            <td data-label="Accion"><a class="btn btn--outline" href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td data-label="ID">#TK-1045</td>
+            <td data-label="Asunto">No carga la plataforma</td>
+            <td data-label="Categoria">Software</td>
+            <td data-label="Prioridad"><span class="badge badge--alta">Alta</span></td>
+            <td data-label="Estado">Abierto</td>
+            <td data-label="Accion"><a class="btn btn--outline" href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td data-label="ID">#TK-1046</td>
+            <td data-label="Asunto">Restablecer contrasena</td>
+            <td data-label="Categoria">Acceso y cuentas</td>
+            <td data-label="Prioridad"><span class="badge badge--media">Media</span></td>
+            <td data-label="Estado">Resuelto</td>
+            <td data-label="Accion"><a class="btn btn--outline" href="#">Ver</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Mesa de Ayuda &middot; Actividad #6 &middot; Unidad 3 &mdash; Desarrollo de Sistemas Informaticos &middot; UTM
+    </div>
+  </footer>
+
+</body>
+</html>

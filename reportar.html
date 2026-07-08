@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportar incidente · Mesa de Ayuda — UTM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a class="navbar__brand" href="dashboard.html">
+      <span class="navbar__brand-mark">M</span> Mesa de Ayuda
+    </a>
+    <input type="checkbox" id="navToggle" class="navbar__checkbox">
+    <label for="navToggle" class="navbar__toggle" aria-label="Abrir menu">&#9776;</label>
+    <ul class="navbar__links">
+      <li><a class="navbar__link" href="dashboard.html">Dashboard</a></li>
+      <li><a class="navbar__link" href="tickets.html">Tickets</a></li>
+      <li><a class="navbar__link is-active" href="reportar.html">Reportar</a></li>
+    </ul>
+  </nav>
+
+  <main class="container page">
+
+    <header class="page-header">
+      <h1 class="page-title">Reportar incidente</h1>
+      <p class="page-subtitle">Completa los datos para registrar un nuevo ticket.</p>
+    </header>
+
+    <!-- ===================== FORMULARIO (Grid 2 columnas) ===================== -->
+    <div class="form-card">
+      <div class="form-grid">
+
+        <div class="form-group form-group--full">
+          <label class="form-label" for="asunto">Asunto del incidente</label>
+          <input class="form-control" type="text" id="asunto"
+                 placeholder="Ej. No puedo iniciar sesion en la plataforma">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="categoria">Categoria</label>
+          <select class="form-control" id="categoria">
+            <option>Hardware</option>
+            <option>Software</option>
+            <option>Redes</option>
+            <option>Acceso y cuentas</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prioridad">Prioridad</label>
+          <select class="form-control" id="prioridad">
+            <option>Baja</option>
+            <option>Media</option>
+            <option>Alta</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group--full">
+          <label class="form-label" for="correo">Correo de contacto</label>
+          <input class="form-control" type="email" id="correo"
+                 placeholder="usuario@utm.edu.ec">
+        </div>
+
+        <div class="form-group form-group--full">
+          <label class="form-label" for="descripcion">Descripcion</label>
+          <textarea class="form-control" id="descripcion"
+                    placeholder="Describe el problema con el mayor detalle posible..."></textarea>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn--primary" type="submit">Enviar ticket</button>
+        <button class="btn btn--outline" type="reset">Limpiar</button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Mesa de Ayuda &middot; Actividad #6 &middot; Unidad 3 &mdash; Desarrollo de Sistemas Informaticos &middot; UTM
+    </div>
+  </footer>
+
+</body>
+</html>
